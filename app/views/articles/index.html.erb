@@ -2,6 +2,13 @@
 
 <%= link_to 'Create new', new_article_path %>
  
+ <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+  Tooltip on top
+</button>
+
+<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
+
 <table>
   <tr>
     <th>Title</th>
@@ -10,12 +17,13 @@
   </tr>
  
   <% @articles.each do |article| %>
-    <tr>
+    <tr id = '<%= dom_id(article) %>' data-article-id="<%= article.id %>">
       <td><%= article.title %></td>
       <td><%= article.text %></td>
       <td><%= link_to 'Show', article_path(article) %></td>
       <td><%= link_to 'Edit', edit_article_path(article) %></td>
-      <td><%= link_to 'Destroy', article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to "DestroyJS", "#", class: "destroy" %></td>
+      <td><%= link_to "DestroyRails", article_path(article), method: :delete, remote: true %></td>
     </tr>
   <% end %>
 </table>
